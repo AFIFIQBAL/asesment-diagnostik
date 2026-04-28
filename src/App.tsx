@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   LayoutDashboard, 
   Users, 
@@ -11,6 +11,7 @@ import {
   FileText, 
   Settings, 
   ChevronRight,
+  LogOut,
   GraduationCap,
   ClipboardCheck,
   TrendingUp,
@@ -23,9 +24,9 @@ import { LEARNING_STYLE_QUESTIONS, PERSONALITY_QUESTIONS, MULTIPLE_INTELLIGENCE_
 import StudentManager from './components/StudentManager';
 import AssessmentFlow from './components/AssessmentFlow';
 import AnalysisView from './components/AnalysisView';
-
 import SchoolProfile from './components/SchoolProfile';
 import SuggestionsView from './components/SuggestionsView';
+import LoginPage from './components/LoginPage';
 
 const VIEWS = {
   DASHBOARD: 'dashboard',
@@ -38,11 +39,39 @@ const VIEWS = {
 };
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState<'admin' | 'guru' | null>(null);
   const [activeView, setActiveView] = useState(VIEWS.DASHBOARD);
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const [isSidebarOpen, setSidebarOpen] = useState(window.innerWidth > 1024);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [selectedAssessmentType, setSelectedAssessmentType] = useState<AssessmentType | null>(null);
   const [currentResult, setCurrentResult] = useState<AssessmentResult | null>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1024) {
+        setSidebarOpen(true);
+        setIsMobileMenuOpen(false);
+      } else {
+        setSidebarOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleLogin = (role: 'admin' | 'guru') => {
+    setIsLoggedIn(true);
+    setUserRole(role);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUserRole(null);
+    setActiveView(VIEWS.DASHBOARD);
+    setIsMobileMenuOpen(false);
+  };
 
   const menuItems = [
     { id: VIEWS.DASHBOARD, label: 'Dashboard', icon: LayoutDashboard },
@@ -53,6 +82,20 @@ export default function App() {
     { id: VIEWS.REPORTS, label: 'Laporan', icon: FileText },
     { id: VIEWS.PROFILE, label: 'Profil Sekolah', icon: Settings },
   ];
+
+  if (!isLoggedIn) {
+    return <LoginPage onLogin={handleLogin} />;
+  }
+
+  const handleMenuItemClick = (id: string) => {
+    setActiveView(id);
+    if (id !== VIEWS.ASSESSMENTS) {
+      setSelectedAssessmentType(null);
+    }
+    if (window.innerWidth <= 1024) {
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   const handleStartAssessment = (type: AssessmentType) => {
     const mockStudent: Student = { id: '1', name: 'Ahmad Fauzi', nis: '12345', class: 'X-A', gender: 'L', schoolId: 's1', createdAt: Date.now() };
@@ -94,85 +137,136 @@ export default function App() {
     setActiveView(VIEWS.ANALYSIS);
   };
 
+  const SidebarContent = () => (
+    <>
+      <div className="p-6 flex items-center gap-3">
+        <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-200">
+          <GraduationCap className="text-white w-6 h-6" />
+        </div>
+        {(isSidebarOpen || isMobileMenuOpen) && (
+          <motion.span 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="font-bold text-xl tracking-tight text-blue-950"
+          >
+            Senostik
+          </motion.span>
+        )}
+      </div>
+
+      <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
+        {menuItems.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => handleMenuItemClick(item.id)}
+            className={cn(
+              "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all group text-left",
+              activeView === item.id 
+                ? "bg-blue-50 text-blue-600 font-medium shadow-sm" 
+                : "text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#1E293B]"
+            )}
+          >
+            <item.icon className={cn(
+              "w-5 h-5 flex-shrink-0",
+              activeView === item.id ? "text-blue-600" : "group-hover:text-[#1E293B]"
+            )} />
+            {(isSidebarOpen || isMobileMenuOpen) && <span>{item.label}</span>}
+          </button>
+        ))}
+      </nav>
+
+      <div className="p-4 border-t border-[#E2E8F0]">
+        <button 
+          onClick={() => setSidebarOpen(!isSidebarOpen)}
+          className="hidden lg:flex w-full items-center gap-3 px-4 py-3 text-[#64748B] hover:bg-[#F1F5F9] rounded-xl transition-all"
+        >
+          <ChevronRight className={cn("w-5 h-5 transition-transform", isSidebarOpen ? "rotate-180" : "")} />
+          {isSidebarOpen && <span>Sembunyikan</span>}
+        </button>
+        <button 
+          onClick={handleLogout}
+          className="lg:hidden w-full flex items-center gap-3 px-4 py-3 text-rose-600 hover:bg-rose-50 rounded-xl transition-all font-medium"
+        >
+          <LogOut size={20} />
+          <span>Keluar</span>
+        </button>
+      </div>
+    </>
+  );
+
   return (
     <div className="flex h-screen bg-[#F8FAFC] text-[#1E293B] overflow-hidden font-sans">
+      {/* Desktop Sidebar */}
       <motion.aside 
         initial={false}
         animate={{ width: isSidebarOpen ? 260 : 80 }}
         className={cn(
-          "bg-white border-r border-[#E2E8F0] flex flex-col transition-all duration-300 relative z-20",
+          "bg-white border-r border-[#E2E8F0] hidden lg:flex flex-col transition-all duration-300 relative z-40",
           !isSidebarOpen && "items-center"
         )}
       >
-        <div className="p-6 flex items-center gap-3">
-          <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-200">
-            <GraduationCap className="text-white w-6 h-6" />
-          </div>
-          {isSidebarOpen && (
-            <motion.span 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="font-bold text-xl tracking-tight text-blue-950"
-            >
-              Senostik
-            </motion.span>
-          )}
-        </div>
-
-        <nav className="flex-1 px-4 py-4 space-y-1">
-          {menuItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => {
-                setActiveView(item.id);
-                if (item.id !== VIEWS.ASSESSMENTS) {
-                   setSelectedAssessmentType(null);
-                }
-              }}
-              className={cn(
-                "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all group text-left",
-                activeView === item.id 
-                  ? "bg-blue-50 text-blue-600 font-medium shadow-sm" 
-                  : "text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#1E293B]"
-              )}
-            >
-              <item.icon className={cn(
-                "w-5 h-5 flex-shrink-0",
-                activeView === item.id ? "text-blue-600" : "group-hover:text-[#1E293B]"
-              )} />
-              {isSidebarOpen && <span>{item.label}</span>}
-            </button>
-          ))}
-        </nav>
-
-        <div className="p-4 border-t border-[#E2E8F0]">
-          <button 
-            onClick={() => setSidebarOpen(!isSidebarOpen)}
-            className="w-full flex items-center gap-3 px-4 py-3 text-[#64748B] hover:bg-[#F1F5F9] rounded-xl transition-all"
-          >
-            <ChevronRight className={cn("w-5 h-5 transition-transform", isSidebarOpen ? "rotate-180" : "")} />
-            {isSidebarOpen && <span>Sembunyikan</span>}
-          </button>
-        </div>
+        <SidebarContent />
       </motion.aside>
 
-      <main className="flex-1 flex flex-col overflow-hidden">
-        <header className="h-20 bg-white border-b border-[#E2E8F0] flex items-center justify-between px-8 sticky top-0 z-10 shrink-0">
-          <h1 className="text-xl font-bold text-[#0F172A]">
-            {menuItems.find(i => i.id === activeView)?.label}
-          </h1>
+      {/* Mobile Drawer Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+            />
+            <motion.aside
+              initial={{ x: -280 }}
+              animate={{ x: 0 }}
+              exit={{ x: -280 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed inset-y-0 left-0 w-[280px] bg-white shadow-2xl z-50 lg:hidden flex flex-col"
+            >
+              <SidebarContent />
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+
+      <main className="flex-1 flex flex-col overflow-hidden w-full">
+        <header className="h-16 lg:h-20 bg-white border-b border-[#E2E8F0] flex items-center justify-between px-4 lg:px-8 sticky top-0 z-30 shrink-0">
           <div className="flex items-center gap-4">
-            <div className="flex flex-col items-end mr-2">
-              <span className="text-sm font-semibold text-[#0F172A]">Guru BK</span>
-              <span className="text-xs text-[#64748B]">Admin Sekolah</span>
+            <button 
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="p-2 text-slate-600 hover:bg-slate-100 rounded-lg lg:hidden"
+            >
+              <LayoutDashboard size={24} />
+            </button>
+            <h1 className="text-lg lg:text-xl font-bold text-[#0F172A] truncate max-w-[150px] sm:max-w-none">
+              {menuItems.find(i => i.id === activeView)?.label}
+            </h1>
+          </div>
+          <div className="flex items-center gap-3 lg:gap-6">
+            <div className="flex items-center gap-2 lg:gap-3">
+              <div className="hidden sm:flex flex-col items-end mr-2">
+                <span className="text-sm font-semibold text-[#0F172A]">{userRole === 'admin' ? 'Administrator' : 'Guru BK'}</span>
+                <span className="text-xs text-[#64748B] truncate max-w-[100px]">afifjunaaa...</span>
+              </div>
+              <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold border-2 border-white shadow-sm shrink-0">
+                {userRole === 'admin' ? 'AD' : 'BK'}
+              </div>
             </div>
-            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold border-2 border-white shadow-sm">
-              BK
-            </div>
+            <div className="hidden sm:block h-8 w-[1px] bg-[#E2E8F0]" />
+            <button 
+              onClick={handleLogout}
+              className="hidden sm:block p-2 text-slate-400 hover:text-rose-600 transition-colors"
+              title="Keluar"
+            >
+              <LogOut size={20} />
+            </button>
           </div>
         </header>
 
-        <div className="flex-1 overflow-y-auto p-8 scroll-smooth">
+        <div className="flex-1 overflow-y-auto p-4 lg:p-8 scroll-smooth">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeView + (selectedAssessmentType || '')}
@@ -180,7 +274,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="max-w-7xl mx-auto"
+              className="max-w-7xl mx-auto w-full"
             >
               {activeView === VIEWS.DASHBOARD && <DashboardView onStartAssessment={handleStartAssessment} />}
               {activeView === VIEWS.STUDENTS && <StudentManager />}
@@ -225,39 +319,39 @@ function DashboardView({ onStartAssessment }: { onStartAssessment: (t: Assessmen
   ];
 
   return (
-    <div className="space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="space-y-6 lg:space-y-8">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
         {stats.map((stat) => (
-          <div key={stat.label} className="bg-white p-6 rounded-2xl border border-[#E2E8F0] shadow-sm hover:shadow-md transition-shadow">
+          <div key={stat.label} className="bg-white p-4 lg:p-6 rounded-2xl border border-[#E2E8F0] shadow-sm hover:shadow-md transition-shadow">
             <div className={cn(
-              "w-12 h-12 rounded-xl flex items-center justify-center mb-4 border",
+              "w-10 h-10 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center mb-3 lg:mb-4 border",
               stat.color === 'blue' && "bg-blue-50 text-blue-600 border-blue-100",
               stat.color === 'emerald' && "bg-emerald-50 text-emerald-600 border-emerald-100",
               stat.color === 'amber' && "bg-amber-50 text-amber-600 border-amber-100",
               stat.color === 'purple' && "bg-purple-50 text-purple-600 border-purple-100",
             )}>
-              <stat.icon size={24} />
+              <stat.icon className="w-5 h-5 lg:w-6 lg:h-6" />
             </div>
-            <p className="text-[#64748B] text-sm font-medium">{stat.label}</p>
-            <h3 className="text-2xl font-bold text-[#0F172A] mt-1">{stat.value}</h3>
+            <p className="text-[#64748B] text-[10px] lg:text-sm font-medium uppercase lg:normal-case tracking-wider lg:tracking-normal">{stat.label}</p>
+            <h3 className="text-xl lg:text-2xl font-bold text-[#0F172A] mt-1">{stat.value}</h3>
           </div>
         ))}
       </div>
 
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-10 rounded-3xl text-white shadow-xl shadow-blue-200 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-6 lg:p-10 rounded-3xl text-white shadow-xl shadow-blue-200 relative overflow-hidden">
         <div className="relative z-10 max-w-xl">
-           <h2 className="text-3xl font-bold mb-4">Selamat Datang di Senostik V3 Online</h2>
-           <p className="text-blue-100 mb-8 leading-relaxed">
-             Mulai asesmen baru untuk mendapatkan insight mendaalam tentang perkembangan belajar dan kepribadian siswa Anda hari ini.
+           <h2 className="text-2xl lg:text-3xl font-bold mb-3">Selamat Datang di Senostik V3 Online</h2>
+           <p className="text-blue-100 mb-6 lg:mb-8 text-sm lg:text-base leading-relaxed">
+             Mulai asesmen baru untuk mendapatkan insight mendalam tentang perkembangan belajar dan kepribadian siswa Anda hari ini.
            </p>
            <button 
              onClick={() => onStartAssessment(AssessmentType.LEARNING_STYLE)}
-             className="px-8 py-3 bg-white text-blue-700 font-bold rounded-xl hover:bg-blue-50 transition-colors shadow-lg"
+             className="w-full sm:w-auto px-8 py-3 bg-white text-blue-700 font-bold rounded-xl hover:bg-blue-50 transition-colors shadow-lg"
            >
              Mulai Asesmen Kilat
            </button>
         </div>
-        <GraduationCap className="absolute -right-10 -bottom-10 w-64 h-64 text-blue-500 opacity-20 rotate-12" />
+        <GraduationCap className="absolute -right-10 -bottom-10 w-48 h-48 lg:w-64 lg:h-64 text-blue-500 opacity-20 rotate-12" />
       </div>
     </div>
   );
@@ -272,25 +366,25 @@ function AssessmentListView({ onStart }: { onStart: (t: AssessmentType) => void 
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8">
       {assessments.map((a) => (
         <div 
           key={a.id} 
           onClick={() => onStart(a.id)}
-          className="bg-white group p-8 rounded-3xl border border-[#E2E8F0] shadow-sm hover:border-blue-300 hover:shadow-xl hover:shadow-blue-500/5 transition-all cursor-pointer"
+          className="bg-white group p-6 lg:p-8 rounded-3xl border border-[#E2E8F0] shadow-sm hover:border-blue-300 hover:shadow-xl hover:shadow-blue-500/5 transition-all cursor-pointer"
         >
           <div className={cn(
-             "w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border",
+             "w-12 h-12 lg:w-14 lg:h-14 rounded-2xl flex items-center justify-center mb-4 lg:mb-6 group-hover:scale-110 transition-transform border",
              a.color === 'blue' && "bg-blue-50 text-blue-600 border-blue-100",
              a.color === 'emerald' && "bg-emerald-50 text-emerald-600 border-emerald-100",
              a.color === 'amber' && "bg-amber-50 text-amber-600 border-amber-100",
              a.color === 'purple' && "bg-purple-50 text-purple-600 border-purple-100",
           )}>
-            <a.icon size={28} />
+            <a.icon className="w-6 h-6 lg:w-7 lg:h-7" />
           </div>
-          <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">{a.title}</h3>
-          <p className="text-[#64748B] mb-8 leading-relaxed">{a.desc}</p>
-          <div className="flex items-center gap-2 font-bold text-blue-600 group-hover:gap-3 transition-all">
+          <h3 className="text-lg lg:text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">{a.title}</h3>
+          <p className="text-[#64748B] text-sm lg:text-base mb-6 lg:mb-8 leading-relaxed">{a.desc}</p>
+          <div className="flex items-center gap-2 font-bold text-sm lg:text-base text-blue-600 group-hover:gap-3 transition-all">
             Mulai Sekarang <ChevronRight size={18} />
           </div>
         </div>
@@ -301,12 +395,12 @@ function AssessmentListView({ onStart }: { onStart: (t: AssessmentType) => void 
 
 function ContentView({ title }: { title: string }) {
   return (
-    <div className="bg-white p-12 rounded-3xl border border-[#E2E8F0] shadow-sm min-h-[400px] flex flex-col items-center justify-center text-center">
-      <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-6 text-slate-300">
-        <FileText size={40} />
+    <div className="bg-white p-8 lg:p-12 rounded-3xl border border-[#E2E8F0] shadow-sm min-h-[300px] lg:min-h-[400px] flex flex-col items-center justify-center text-center">
+      <div className="w-16 h-16 lg:w-20 lg:h-20 bg-slate-50 rounded-full flex items-center justify-center mb-4 lg:mb-6 text-slate-300">
+        <FileText className="w-10 h-10 lg:w-12 lg:h-12" />
       </div>
-      <h2 className="text-2xl font-bold mb-2">{title}</h2>
-      <p className="text-[#64748B] max-w-md">Modul ini sedang dalam pengembangan untuk menghubungkan logika Excel ke sistem web otomatis.</p>
+      <h2 className="text-xl lg:text-2xl font-bold mb-2">{title}</h2>
+      <p className="text-[#64748B] text-sm lg:text-base max-w-md">Modul ini sedang dalam pengembangan untuk menghubungkan logika Excel ke sistem web otomatis.</p>
     </div>
   );
 }
