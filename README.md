@@ -1,20 +1,44 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🧠 Aplikasi Assessment Diagnostik Non-Kognitif
 
-# Run and deploy your AI Studio app
+Aplikasi **Assessment Diagnostik Non-Kognitif** merupakan sistem berbasis web yang dirancang untuk membantu proses identifikasi aspek non-kognitif peserta didik, seperti motivasi, minat, sikap, dan kondisi emosional. Aplikasi ini dikembangkan sebagai bagian dari penelitian skripsi.
 
-This contains everything you need to run your app locally.
+## 📌 Informasi Proyek
 
-View your app in AI Studio: https://ai.studio/apps/bef67599-ba9b-492f-8495-681a56f18137
+- **Nama Proyek**: Assessment Diagnostik Non-Kognitif  
+- **Pengembang**: Afif Iqbal Junandar  
+- **Jenis Proyek**: Skripsi / Tugas Akhir  
+- **Tujuan**: Membantu tenaga pendidik dalam melakukan asesmen awal kondisi non-kognitif siswa secara efektif dan terstruktur  
 
-## Run Locally
+---
 
-**Prerequisites:**  Node.js
+## 🚀 Fitur Utama
 
+- 📝 Pengisian kuesioner non-kognitif secara online  
+- 📊 Analisis hasil asesmen otomatis  
+- 📁 Penyimpanan data responden  
+- 📈 Visualisasi hasil dalam bentuk grafik  
+- 🔐 Sistem autentikasi pengguna (login/logout)  
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+- **Frontend**: HTML, CSS, JavaScript  
+- **Backend**: (isi sesuai teknologi yang digunakan, misalnya: Node.js / PHP / Laravel)  
+- **Database**: MySQL / PostgreSQL  
+- **Tools**: Git, GitHub, npm  
+
+---
+
+## 📂 Struktur Folder
+
+```bash
+├── public/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   └── assets/
+├── database/
+├── routes/
+├── README.md
+└── package.json
