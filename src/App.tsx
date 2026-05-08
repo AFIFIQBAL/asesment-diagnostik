@@ -15,7 +15,8 @@ import {
   GraduationCap,
   ClipboardCheck,
   TrendingUp,
-  Lightbulb
+  Lightbulb,
+  Info
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from './lib/utils';
@@ -352,6 +353,20 @@ function DashboardView({ onStartAssessment }: { onStartAssessment: (t: Assessmen
            </button>
         </div>
         <GraduationCap className="absolute -right-10 -bottom-10 w-48 h-48 lg:w-64 lg:h-64 text-emerald-500 opacity-20 rotate-12" />
+      </div>
+
+      <div className="bg-emerald-50 border border-emerald-100 p-6 lg:p-8 rounded-3xl relative overflow-hidden">
+        <div className="flex gap-4 lg:gap-6 items-start">
+          <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-white flex items-center justify-center shrink-0 shadow-sm border border-emerald-100">
+            <Info className="text-emerald-600" size={24} />
+          </div>
+          <div>
+            <h3 className="text-base lg:text-lg font-bold text-emerald-950 mb-2">Apa itu Asesmen Diagnostik Non-Kognitif?</h3>
+            <p className="text-emerald-800/80 text-xs lg:text-base leading-relaxed italic">
+              "Bloom menjelaskan bahwa asesmen diagnostik merupakan proses pengumpulan informasi untuk mengetahui kondisi awal peserta didik sebelum pembelajaran dilakukan. Dalam konteks non-kognitif, asesmen digunakan untuk memahami aspek afektif, minat, motivasi, dan karakteristik belajar siswa."
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
