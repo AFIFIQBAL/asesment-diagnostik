@@ -51,7 +51,7 @@ export default function AssessmentFlow({ type, questions, onComplete, onCancel }
         </button>
         <div className="text-right">
           <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Progress</span>
-          <p className="text-lg font-bold text-blue-600 font-mono">{currentIndex + 1} / {questions.length}</p>
+          <p className="text-lg font-bold text-emerald-600 font-mono">{currentIndex + 1} / {questions.length}</p>
         </div>
       </div>
 
@@ -59,12 +59,12 @@ export default function AssessmentFlow({ type, questions, onComplete, onCancel }
         <motion.div 
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
-          className="h-full bg-blue-600 shadow-[0_0_8px_rgba(37,99,235,0.4)]"
+          className="h-full bg-emerald-600 shadow-[0_0_8px_rgba(16,185,129,0.4)]"
         />
       </div>
 
       <div className="bg-white p-12 rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-2 bg-blue-600 opacity-10" />
+        <div className="absolute top-0 left-0 w-full h-2 bg-emerald-600 opacity-10" />
         
         <AnimatePresence mode="wait">
           <motion.div
@@ -77,7 +77,7 @@ export default function AssessmentFlow({ type, questions, onComplete, onCancel }
           >
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <span className="px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-widest rounded-full border border-blue-100">
+                <span className="px-3 py-1 bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-widest rounded-full border border-emerald-100">
                   {currentQuestion.category}
                 </span>
               </div>
@@ -94,8 +94,8 @@ export default function AssessmentFlow({ type, questions, onComplete, onCancel }
                   className={cn(
                     "w-full flex items-center justify-between p-4 md:p-5 rounded-2xl border-2 transition-all group",
                     answers[currentQuestion.id] === opt.value
-                      ? "border-blue-600 bg-blue-50/50 ring-4 ring-blue-50"
-                      : "border-slate-100 bg-slate-50/30 hover:border-blue-200 hover:bg-white"
+                      ? "border-emerald-600 bg-emerald-50/50 ring-4 ring-emerald-50"
+                      : "border-slate-100 bg-slate-50/30 hover:border-emerald-200 hover:bg-white"
                   )}
                 >
                   <div className="flex items-center gap-4">
@@ -108,7 +108,7 @@ export default function AssessmentFlow({ type, questions, onComplete, onCancel }
                     <span className="font-semibold text-slate-700">{opt.label}</span>
                   </div>
                   {answers[currentQuestion.id] === opt.value && (
-                    <CheckCircle2 className="text-blue-600 w-6 h-6" />
+                    <CheckCircle2 className="text-emerald-600 w-6 h-6" />
                   )}
                 </button>
               ))}
@@ -118,7 +118,7 @@ export default function AssessmentFlow({ type, questions, onComplete, onCancel }
       </div>
 
       <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-200">
-        <Info className="text-blue-500 shrink-0" size={20} />
+        <Info className="text-emerald-500 shrink-0" size={20} />
         <p className="text-xs text-slate-500 leading-relaxed">
           Pilih jawaban yang paling menggambarkan diri kamu saat ini. Tidak ada jawaban benar atau salah dalam asesmen ini.
         </p>

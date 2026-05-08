@@ -31,7 +31,7 @@ export default function StudentManager() {
             placeholder="Cari nama atau NIS..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-sm"
+            className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all shadow-sm"
           />
         </div>
         <div className="flex flex-wrap items-center gap-2 lg:gap-3">
@@ -43,7 +43,7 @@ export default function StudentManager() {
           </button>
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="w-full lg:w-auto flex items-center justify-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors text-sm font-bold shadow-md shadow-blue-100"
+            className="w-full lg:w-auto flex items-center justify-center gap-2 px-6 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-colors text-sm font-bold shadow-md shadow-emerald-100"
           >
             <Plus size={18} /> Tambah Siswa
           </button>
@@ -67,7 +67,7 @@ export default function StudentManager() {
                 <tr key={student.id} className="hover:bg-slate-50/50 transition-colors group">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs shrink-0">
                         {student.name.charAt(0)}
                       </div>
                       <span className="font-semibold text-slate-900">{student.name}</span>
@@ -78,14 +78,14 @@ export default function StudentManager() {
                   <td className="px-6 py-4 text-center">
                      <span className={cn(
                        "px-2 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider whitespace-nowrap",
-                       student.gender === 'L' ? "bg-sky-50 text-sky-600" : "bg-rose-50 text-rose-600"
+                       student.gender === 'L' ? "bg-teal-50 text-teal-600" : "bg-rose-50 text-rose-600"
                      )}>
                        {student.gender === 'L' ? 'L' : 'P'}
                      </span>
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex items-center justify-end gap-1 lg:gap-2 lg:opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button className="p-2 text-slate-400 hover:text-blue-600 transition-colors">
+                      <button className="p-2 text-slate-400 hover:text-emerald-600 transition-colors">
                         <Edit2 size={16} />
                       </button>
                       <button className="p-2 text-slate-400 hover:text-rose-600 transition-colors">

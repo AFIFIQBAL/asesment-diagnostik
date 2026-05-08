@@ -26,7 +26,7 @@ export default function AnalysisView({ result, studentName }: AnalysisViewProps)
     fullMark: 100
   }));
 
-  const COLORS = ['#2563EB', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4', '#F97316', '#64748B'];
+  const COLORS = ['#10B981', '#059669', '#047857', '#0D9488', '#0F766E', '#16A34A', '#15803D', '#4D7C0F'];
 
   const handleDownloadPDF = async () => {
     const element = document.getElementById('analysis-content');
@@ -57,7 +57,7 @@ export default function AnalysisView({ result, studentName }: AnalysisViewProps)
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 px-2 lg:px-4">
         <div>
           <h2 className="text-2xl lg:text-3xl font-bold tracking-tight text-slate-900">Hasil Analisis</h2>
-          <p className="text-slate-500 mt-1 text-sm lg:text-base">Laporan asesmen untuk <span className="font-bold text-blue-600">{studentName}</span></p>
+          <p className="text-slate-500 mt-1 text-sm lg:text-base">Laporan asesmen untuk <span className="font-bold text-emerald-600">{studentName}</span></p>
         </div>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 no-print">
           <button className="flex items-center justify-center gap-2 px-4 py-2.5 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all text-sm font-semibold shadow-sm bg-white">
@@ -65,7 +65,7 @@ export default function AnalysisView({ result, studentName }: AnalysisViewProps)
           </button>
           <button 
             onClick={handleDownloadPDF}
-            className="flex items-center justify-center gap-2 px-6 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all text-sm font-bold shadow-md shadow-blue-100"
+            className="flex items-center justify-center gap-2 px-6 py-2.5 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-all text-sm font-bold shadow-md shadow-emerald-100"
           >
             <Download size={18} /> Unduh PDF
           </button>
@@ -84,8 +84,8 @@ export default function AnalysisView({ result, studentName }: AnalysisViewProps)
                 <Radar
                   name="Skor"
                   dataKey="value"
-                  stroke="#2563EB"
-                  fill="#2563EB"
+                  stroke="#10B981"
+                  fill="#10B981"
                   fillOpacity={0.6}
                 />
                 <Tooltip />
@@ -128,15 +128,15 @@ export default function AnalysisView({ result, studentName }: AnalysisViewProps)
              </div>
           </div>
 
-          <div className="bg-blue-900 text-white p-6 lg:p-8 rounded-3xl shadow-xl shadow-blue-200 relative overflow-hidden">
-             <div className="absolute -bottom-10 -right-10 w-32 h-32 lg:w-48 lg:h-48 bg-blue-800 rounded-full blur-3xl opacity-50" />
+          <div className="bg-emerald-900 text-white p-6 lg:p-8 rounded-3xl shadow-xl shadow-emerald-200 relative overflow-hidden">
+             <div className="absolute -bottom-10 -right-10 w-32 h-32 lg:w-48 lg:h-48 bg-emerald-800 rounded-full blur-3xl opacity-50" />
              <div className="flex items-center gap-3 mb-4">
-               <div className="w-10 h-10 bg-blue-700 rounded-xl flex items-center justify-center">
-                 <Lightbulb className="text-blue-300" size={24} />
+               <div className="w-10 h-10 bg-emerald-700 rounded-xl flex items-center justify-center">
+                 <Lightbulb className="text-emerald-300" size={24} />
                </div>
                <h3 className="font-bold text-lg lg:text-xl">Potensi Dominan</h3>
              </div>
-             <p className="text-blue-100 mb-6 text-sm lg:text-base leading-relaxed">
+             <p className="text-emerald-100 mb-6 text-sm lg:text-base leading-relaxed">
                Berdasarkan hasil analisis di atas, siswa ini menunjukkan potensi dominan pada bidang {Object.keys(result.scores).reduce((a, b) => result.scores[a] > result.scores[b] ? a : b)}. Hal ini sangat baik untuk pengembangan karir di masa depan.
              </p>
           </div>

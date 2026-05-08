@@ -140,14 +140,14 @@ export default function App() {
   const SidebarContent = () => (
     <>
       <div className="p-6 flex items-center gap-3">
-        <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-200">
+        <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-emerald-200">
           <GraduationCap className="text-white w-6 h-6" />
         </div>
         {(isSidebarOpen || isMobileMenuOpen) && (
           <motion.span 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="font-bold text-xl tracking-tight text-blue-950"
+            className="font-bold text-xl tracking-tight text-emerald-950"
           >
             Senostik
           </motion.span>
@@ -162,13 +162,13 @@ export default function App() {
             className={cn(
               "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all group text-left",
               activeView === item.id 
-                ? "bg-blue-50 text-blue-600 font-medium shadow-sm" 
+                ? "bg-emerald-50 text-emerald-600 font-medium shadow-sm" 
                 : "text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#1E293B]"
             )}
           >
             <item.icon className={cn(
               "w-5 h-5 flex-shrink-0",
-              activeView === item.id ? "text-blue-600" : "group-hover:text-[#1E293B]"
+              activeView === item.id ? "text-emerald-600" : "group-hover:text-[#1E293B]"
             )} />
             {(isSidebarOpen || isMobileMenuOpen) && <span>{item.label}</span>}
           </button>
@@ -251,7 +251,7 @@ export default function App() {
                 <span className="text-sm font-semibold text-[#0F172A]">{userRole === 'admin' ? 'Administrator' : 'Guru BK'}</span>
                 <span className="text-xs text-[#64748B] truncate max-w-[100px]">afifjunaaa...</span>
               </div>
-              <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold border-2 border-white shadow-sm shrink-0">
+              <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold border-2 border-white shadow-sm shrink-0">
                 {userRole === 'admin' ? 'AD' : 'BK'}
               </div>
             </div>
@@ -312,7 +312,7 @@ export default function App() {
 
 function DashboardView({ onStartAssessment }: { onStartAssessment: (t: AssessmentType) => void }) {
   const stats = [
-    { label: 'Total Siswa', value: '124', icon: Users, color: 'blue' },
+    { label: 'Total Siswa', value: '124', icon: Users, color: 'emerald' },
     { label: 'Asesmen Selesai', value: '88', icon: ClipboardCheck, color: 'emerald' },
     { label: 'Belum Asesmen', value: '36', icon: BrainCircuit, color: 'amber' },
     { label: 'Rata-rata Skor', value: '82%', icon: GraduationCap, color: 'purple' },
@@ -325,7 +325,7 @@ function DashboardView({ onStartAssessment }: { onStartAssessment: (t: Assessmen
           <div key={stat.label} className="bg-white p-4 lg:p-6 rounded-2xl border border-[#E2E8F0] shadow-sm hover:shadow-md transition-shadow">
             <div className={cn(
               "w-10 h-10 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center mb-3 lg:mb-4 border",
-              stat.color === 'blue' && "bg-blue-50 text-blue-600 border-blue-100",
+              stat.color === 'blue' && "bg-emerald-50 text-emerald-600 border-emerald-100",
               stat.color === 'emerald' && "bg-emerald-50 text-emerald-600 border-emerald-100",
               stat.color === 'amber' && "bg-amber-50 text-amber-600 border-amber-100",
               stat.color === 'purple' && "bg-purple-50 text-purple-600 border-purple-100",
@@ -338,20 +338,20 @@ function DashboardView({ onStartAssessment }: { onStartAssessment: (t: Assessmen
         ))}
       </div>
 
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-6 lg:p-10 rounded-3xl text-white shadow-xl shadow-blue-200 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-emerald-600 to-emerald-800 p-6 lg:p-10 rounded-3xl text-white shadow-xl shadow-emerald-200 relative overflow-hidden">
         <div className="relative z-10 max-w-xl">
            <h2 className="text-2xl lg:text-3xl font-bold mb-3">Selamat Datang di Senostik V3 Online</h2>
-           <p className="text-blue-100 mb-6 lg:mb-8 text-sm lg:text-base leading-relaxed">
+           <p className="text-emerald-100 mb-6 lg:mb-8 text-sm lg:text-base leading-relaxed">
              Mulai asesmen baru untuk mendapatkan insight mendalam tentang perkembangan belajar dan kepribadian siswa Anda hari ini.
            </p>
            <button 
              onClick={() => onStartAssessment(AssessmentType.LEARNING_STYLE)}
-             className="w-full sm:w-auto px-8 py-3 bg-white text-blue-700 font-bold rounded-xl hover:bg-blue-50 transition-colors shadow-lg"
+             className="w-full sm:w-auto px-8 py-3 bg-white text-emerald-700 font-bold rounded-xl hover:bg-emerald-50 transition-colors shadow-lg"
            >
              Mulai Asesmen Kilat
            </button>
         </div>
-        <GraduationCap className="absolute -right-10 -bottom-10 w-48 h-48 lg:w-64 lg:h-64 text-blue-500 opacity-20 rotate-12" />
+        <GraduationCap className="absolute -right-10 -bottom-10 w-48 h-48 lg:w-64 lg:h-64 text-emerald-500 opacity-20 rotate-12" />
       </div>
     </div>
   );
@@ -359,7 +359,7 @@ function DashboardView({ onStartAssessment }: { onStartAssessment: (t: Assessmen
 
 function AssessmentListView({ onStart }: { onStart: (t: AssessmentType) => void }) {
   const assessments = [
-    { id: AssessmentType.LEARNING_STYLE, title: 'Gaya Belajar', desc: 'Visual, Auditori, atau Kinestetik?', icon: BrainCircuit, color: 'blue' },
+    { id: AssessmentType.LEARNING_STYLE, title: 'Gaya Belajar', desc: 'Visual, Auditori, atau Kinestetik?', icon: BrainCircuit, color: 'emerald' },
     { id: AssessmentType.PERSONALITY, title: 'Kepribadian', desc: 'Analisis tipe karakter siswa.', icon: Users, color: 'purple' },
     { id: AssessmentType.MULTIPLE_INTELLIGENCES, title: 'Bakat Ganda', desc: 'Identifikasi potensi kecerdasan majemuk.', icon: GraduationCap, color: 'emerald' },
     { id: AssessmentType.CAREER_INTEREST, title: 'Minat Karir', desc: 'Rekomendasi bidang masa depan.', icon: ClipboardCheck, color: 'amber' },
@@ -371,20 +371,20 @@ function AssessmentListView({ onStart }: { onStart: (t: AssessmentType) => void 
         <div 
           key={a.id} 
           onClick={() => onStart(a.id)}
-          className="bg-white group p-6 lg:p-8 rounded-3xl border border-[#E2E8F0] shadow-sm hover:border-blue-300 hover:shadow-xl hover:shadow-blue-500/5 transition-all cursor-pointer"
+          className="bg-white group p-6 lg:p-8 rounded-3xl border border-[#E2E8F0] shadow-sm hover:border-emerald-300 hover:shadow-xl hover:shadow-emerald-500/5 transition-all cursor-pointer"
         >
           <div className={cn(
              "w-12 h-12 lg:w-14 lg:h-14 rounded-2xl flex items-center justify-center mb-4 lg:mb-6 group-hover:scale-110 transition-transform border",
-             a.color === 'blue' && "bg-blue-50 text-blue-600 border-blue-100",
+             a.color === 'blue' && "bg-emerald-50 text-emerald-600 border-emerald-100",
              a.color === 'emerald' && "bg-emerald-50 text-emerald-600 border-emerald-100",
              a.color === 'amber' && "bg-amber-50 text-amber-600 border-amber-100",
              a.color === 'purple' && "bg-purple-50 text-purple-600 border-purple-100",
           )}>
             <a.icon className="w-6 h-6 lg:w-7 lg:h-7" />
           </div>
-          <h3 className="text-lg lg:text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">{a.title}</h3>
+          <h3 className="text-lg lg:text-xl font-bold mb-2 group-hover:text-emerald-600 transition-colors">{a.title}</h3>
           <p className="text-[#64748B] text-sm lg:text-base mb-6 lg:mb-8 leading-relaxed">{a.desc}</p>
-          <div className="flex items-center gap-2 font-bold text-sm lg:text-base text-blue-600 group-hover:gap-3 transition-all">
+          <div className="flex items-center gap-2 font-bold text-sm lg:text-base text-emerald-600 group-hover:gap-3 transition-all">
             Mulai Sekarang <ChevronRight size={18} />
           </div>
         </div>
