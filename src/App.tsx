@@ -366,6 +366,12 @@ function DashboardView({ onStartAssessment }: { onStartAssessment: (t: Assessmen
               "Bloom menjelaskan bahwa asesmen diagnostik merupakan proses pengumpulan informasi untuk mengetahui kondisi awal peserta didik sebelum pembelajaran dilakukan. Dalam konteks non-kognitif, asesmen digunakan untuk memahami aspek afektif, minat, motivasi, dan karakteristik belajar siswa."
             </p>
           </div>
+          <div className="pt-4 border-t border-emerald-200/50">
+            <h3 className="text-sm lg:text-base font-bold text-emerald-950 mb-2">Tujuan Utama</h3>
+            <p className="text-emerald-800/80 text-xs lg:text-base leading-relaxed italic">
+              "Menurut para ahli, tujuan asesmen diagnostik non-kognitif adalah untuk mengetahui kondisi psikologis, sosial emosional, minat, motivasi, gaya belajar, dan karakteristik peserta didik sebagai dasar dalam merancang strategi pembelajaran yang sesuai, efektif, dan berpusat pada kebutuhan siswa."
+            </p>
+          </div>
         </div>
       </div>
     </div>
