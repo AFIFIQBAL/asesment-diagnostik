@@ -28,6 +28,7 @@ import AnalysisView from './components/AnalysisView';
 import SchoolProfile from './components/SchoolProfile';
 import SuggestionsView from './components/SuggestionsView';
 import LoginPage from './components/LoginPage';
+import ReportsView from './components/ReportsView';
 
 const VIEWS = {
   DASHBOARD: 'dashboard',
@@ -48,6 +49,30 @@ export default function App() {
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [selectedAssessmentType, setSelectedAssessmentType] = useState<AssessmentType | null>(null);
   const [currentResult, setCurrentResult] = useState<AssessmentResult | null>(null);
+  const [students, setStudents] = useState<Student[]>([
+    { id: '1', name: 'Ahmad Fauzi', nis: '12345', class: 'X-A', gender: 'L', schoolId: 's1', createdAt: Date.now() },
+    { id: '2', name: 'Siti Aminah', nis: '12346', class: 'X-A', gender: 'P', schoolId: 's1', createdAt: Date.now() },
+  ]);
+  const [completedResults, setCompletedResults] = useState<AssessmentResult[]>([
+    {
+      id: 'res-1',
+      studentId: '1',
+      type: AssessmentType.LEARNING_STYLE,
+      answers: { 'v1': 5, 'v2': 5, 'v3': 4, 'a1': 2, 'a2': 3, 'a3': 2, 'k1': 3, 'k2': 4, 'k3': 3 },
+      scores: { 'Visual': 93, 'Auditori': 47, 'Kinestetik': 67 },
+      summary: 'Siswa menunjukkan kecenderungan yang sangat kuat pada gaya belajar Visual. Pembelajaran sebaiknya menggunakan gambar, warna, bagan alir, atau diagram terstruktur.',
+      timestamp: Date.now() - 3 * 24 * 60 * 60 * 1000
+    },
+    {
+      id: 'res-2',
+      studentId: '2',
+      type: AssessmentType.PERSONALITY,
+      answers: { 'p1': 5, 'p2': 2, 'p3': 2, 'p4': 4, 'p5': 4, 'p6': 3 },
+      scores: { 'Ekstrovert': 90, 'Introvert': 40, 'Judging': 80, 'Perceiving': 60 },
+      summary: 'Siswa menunjukkan kecenderungan kepribadian Ekstrovert dan Teratur (Judging) yang tinggi. Sangat baik dalam kerja tim, koordinasi kegiatan kelompok, dan pengerjaan proyek terjadwal.',
+      timestamp: Date.now() - 1 * 24 * 60 * 60 * 1000
+    }
+  ]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -135,6 +160,7 @@ export default function App() {
     };
 
     setCurrentResult(result);
+    setCompletedResults(prev => [result, ...prev]);
     setActiveView(VIEWS.ANALYSIS);
   };
 
@@ -278,7 +304,7 @@ export default function App() {
               className="max-w-7xl mx-auto w-full"
             >
               {activeView === VIEWS.DASHBOARD && <DashboardView onStartAssessment={handleStartAssessment} />}
-              {activeView === VIEWS.STUDENTS && <StudentManager />}
+              {activeView === VIEWS.STUDENTS && <StudentManager students={students} setStudents={setStudents} />}
               {activeView === VIEWS.ASSESSMENTS && !selectedAssessmentType && (
                 <AssessmentListView onStart={handleStartAssessment} />
               )}
@@ -301,7 +327,17 @@ export default function App() {
               {activeView === VIEWS.SUGGESTIONS && (
                 <SuggestionsView result={currentResult} studentName={selectedStudent?.name || 'Siswa'} />
               )}
-              {activeView === VIEWS.REPORTS && <ContentView title="Laporan & Cetak" />}
+              {activeView === VIEWS.REPORTS && (
+                <ReportsView 
+                  results={completedResults} 
+                  students={students} 
+                  onViewResult={(result, student) => {
+                    setCurrentResult(result);
+                    setSelectedStudent(student);
+                    setActiveView(VIEWS.ANALYSIS);
+                  }} 
+                />
+              )}
               {activeView === VIEWS.PROFILE && <SchoolProfile />}
             </motion.div>
           </AnimatePresence>

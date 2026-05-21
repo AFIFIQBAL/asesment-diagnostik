@@ -8,11 +8,12 @@ import { Plus, Search, Edit2, Trash2, Download, Upload } from 'lucide-react';
 import { Student } from '../types';
 import { cn } from '../lib/utils';
 
-export default function StudentManager() {
-  const [students, setStudents] = useState<Student[]>([
-    { id: '1', name: 'Ahmad Fauzi', nis: '12345', class: 'X-A', gender: 'L', schoolId: 's1', createdAt: Date.now() },
-    { id: '2', name: 'Siti Aminah', nis: '12346', class: 'X-A', gender: 'P', schoolId: 's1', createdAt: Date.now() },
-  ]);
+interface StudentManagerProps {
+  students: Student[];
+  setStudents: React.Dispatch<React.SetStateAction<Student[]>>;
+}
+
+export default function StudentManager({ students, setStudents }: StudentManagerProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
