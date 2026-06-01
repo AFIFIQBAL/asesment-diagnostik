@@ -6,15 +6,21 @@
 import { AssessmentType, Question } from './types';
 
 export const LEARNING_STYLE_QUESTIONS: Question[] = [
-  { id: 'v1', text: 'Saya lebih mudah mengingat sesuatu dengan melihat gambar atau diagram.', category: 'Visual' },
-  { id: 'v2', text: 'Saya suka mencatat penjelasan guru dengan warna-warna yang menarik.', category: 'Visual' },
-  { id: 'v3', text: 'Saya sering membayangkan apa yang saya baca.', category: 'Visual' },
-  { id: 'a1', text: 'Saya lebih suka mendengarkan penjelasan guru daripada membaca buku sendiri.', category: 'Auditori' },
-  { id: 'a2', text: 'Saya sering membaca dengan suara keras agar lebih paham.', category: 'Auditori' },
-  { id: 'a3', text: 'Saya senang berdiskusi tentang apa yang telah saya pelajari.', category: 'Auditori' },
-  { id: 'k1', text: 'Saya sulit duduk diam dalam waktu lama saat belajar.', category: 'Kinestetik' },
-  { id: 'k2', text: 'Saya lebih mudah memahami materi jika langsung mempraktikkannya.', category: 'Kinestetik' },
-  { id: 'k3', text: 'Saya suka menggunakan jari saya untuk menunjuk kalimat saat membaca.', category: 'Kinestetik' },
+  { id: 'v1', text: 'Saya lebih mudah memahami materi jika disertai gambar, bagan, atau diagram.', category: 'Visual' },
+  { id: 'a1', text: 'Saya lebih paham jika guru menjelaskan materi secara lisan.', category: 'Auditori' },
+  { id: 'k1', text: 'Saya lebih suka belajar dengan praktik langsung daripada hanya membaca teori.', category: 'Kinestetik' },
+  { id: 'v2', text: 'Saya senang membuat catatan berwarna, mind map, atau ringkasan visual.', category: 'Visual' },
+  { id: 'a2', text: 'Saya mudah mengingat materi yang saya dengar dari guru, teman, atau rekaman suara.', category: 'Auditori' },
+  { id: 'k2', text: 'Saya lebih cepat paham jika diberi kesempatan mencoba sendiri.', category: 'Kinestetik' },
+  { id: 'v3', text: 'Saya suka melihat video pembelajaran ketika mempelajari materi baru.', category: 'Visual' },
+  { id: 'a3', text: 'Saya lebih mudah memahami materi melalui diskusi atau tanya jawab.', category: 'Auditori' },
+  { id: 'k3', text: 'Saya merasa lebih fokus jika belajar sambil bergerak atau melakukan aktivitas.', category: 'Kinestetik' },
+  { id: 'v4', text: 'Saya suka membaca materi dan menandai bagian penting dengan stabilo atau garis bawah.', category: 'Visual' },
+  { id: 'a4', text: 'Saya lebih mudah mengingat penjelasan yang diucapkan secara langsung.', category: 'Auditori' },
+  { id: 'k4', text: 'Saya senang belajar melalui simulasi, praktik, eksperimen, atau proyek.', category: 'Kinestetik' },
+  { id: 'v5', text: 'Saya lebih nyaman jika materi disajikan dalam bentuk tabel, grafik, atau gambar.', category: 'Visual' },
+  { id: 'a5', text: 'Saya biasanya belajar dengan mendengarkan penjelasan sambil mencatat poin penting.', category: 'Auditori' },
+  { id: 'k5', text: 'Saya kurang nyaman jika harus duduk diam terlalu lama saat belajar.', category: 'Kinestetik' },
 ];
 
 export const PERSONALITY_QUESTIONS: Question[] = [
