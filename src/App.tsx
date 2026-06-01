@@ -67,9 +67,9 @@ export default function App() {
       id: 'res-2',
       studentId: '2',
       type: AssessmentType.PERSONALITY,
-      answers: { 'p1': 5, 'p2': 2, 'p3': 2, 'p4': 4, 'p5': 4, 'p6': 3 },
-      scores: { 'Ekstrovert': 90, 'Introvert': 40, 'Judging': 80, 'Perceiving': 60 },
-      summary: 'Siswa menunjukkan kecenderungan kepribadian Ekstrovert dan Teratur (Judging) yang tinggi. Sangat baik dalam kerja tim, koordinasi kegiatan kelompok, dan pengerjaan proyek terjadwal.',
+      answers: { 'p1': 5, 'p2': 2, 'p3': 4, 'p4': 4, 'p5': 4, 'p6': 2, 'p7': 4, 'p8': 4, 'p11': 4 },
+      scores: { 'Ekstrovert': 85, 'Introvert': 40, 'Interpersonal': 75, 'Regulasi Diri': 80 },
+      summary: 'Siswa menunjukkan kecenderungan yang tinggi pada aspek Ekstrovert dan Regulasi Diri. Mampu berkomunikasi dengan baik, memiliki rasa percaya diri yang tinggi, serta sanggup mengendalikan emosi ketika menghadapi tantangan di sekolah.',
       timestamp: Date.now() - 1 * 24 * 60 * 60 * 1000
     }
   ]);

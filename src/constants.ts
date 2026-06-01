@@ -24,12 +24,26 @@ export const LEARNING_STYLE_QUESTIONS: Question[] = [
 ];
 
 export const PERSONALITY_QUESTIONS: Question[] = [
-  { id: 'p1', text: 'Saya merasa bertenaga setelah menghabiskan waktu bersama banyak orang.', category: 'Ekstrovert' },
-  { id: 'p2', text: 'Saya lebih suka bekerja sendiri daripada dalam kelompok besar.', category: 'Introvert' },
-  { id: 'p3', text: 'Saya cenderung berpikir matang sebelum berbicara.', category: 'Introvert' },
-  { id: 'p4', text: 'Saya mudah bergaul dengan orang yang baru saya kenal.', category: 'Ekstrovert' },
-  { id: 'p5', text: 'Saya lebih menyukai perencanaan daripada hal yang spontan.', category: 'Judging' },
-  { id: 'p6', text: 'Saya lebih suka mengikuti arus dan fleksibel.', category: 'Perceiving' },
+  { id: 'p1', text: 'Saya merasa bersemangat ketika berada di tengah banyak teman atau orang lain.', category: 'Ekstrovert' },
+  { id: 'p2', text: 'Saya lebih nyaman mengerjakan sesuatu sendiri daripada dalam kelompok besar.', category: 'Introvert' },
+  { id: 'p3', text: 'Saat guru memberi pertanyaan di kelas, saya tidak ragu untuk mengangkat tangan dan menjawab.', category: 'Ekstrovert' },
+  { id: 'p4', text: 'Saya sering diminta teman untuk membantu mereka mengerjakan tugas atau menjelaskan materi.', category: 'Interpersonal' },
+  { id: 'p5', text: 'Saya mudah menceritakan perasaan saya kepada orang yang saya percaya.', category: 'Interpersonal' },
+  { id: 'p6', text: 'Saya lebih suka mendengarkan daripada banyak berbicara dalam suatu diskusi.', category: 'Introvert' },
+  { id: 'p7', text: 'Saya merasa nyaman berkenalan dengan orang baru.', category: 'Ekstrovert' },
+  { id: 'p8', text: 'Jika mendapat tugas kelompok, saya biasanya aktif mengatur dan membagi tugas.', category: 'Ekstrovert' },
+  { id: 'p9', text: 'Saya sering memikirkan sesuatu dengan matang sebelum berbicara atau bertindak.', category: 'Introvert' },
+  { id: 'p10', text: 'Saya mudah merasa lelah jika terlalu lama berada di keramaian.', category: 'Introvert' },
+  { id: 'p11', text: 'Saya dapat mengendalikan emosi ketika menghadapi masalah di sekolah.', category: 'Regulasi Diri' },
+  { id: 'p12', text: 'Ketika ada konflik dengan teman, saya berusaha menyelesaikannya dengan cara baik-baik.', category: 'Interpersonal' },
+  { id: 'p13', text: 'Saya dapat menerima kritik dari guru atau teman tanpa langsung marah atau tersinggung.', category: 'Regulasi Diri' },
+  { id: 'p14', text: 'Saya berusaha menyelesaikan tugas tepat waktu meskipun banyak kegiatan lain.', category: 'Regulasi Diri' },
+  { id: 'p15', text: 'Jika rencana saya tidak berjalan sesuai harapan, saya tetap mencoba mencari solusi lain.', category: 'Regulasi Diri' },
+  { id: 'p16', text: 'Saya mudah bekerja sama dengan teman yang memiliki karakter berbeda dengan saya.', category: 'Interpersonal' },
+  { id: 'p17', text: 'Saya merasa senang jika dilibatkan dalam kegiatan organisasi atau kepanitiaan di sekolah.', category: 'Ekstrovert' },
+  { id: 'p18', text: 'Saya sering menjadi tempat curhat teman ketika mereka mempunyai masalah.', category: 'Interpersonal' },
+  { id: 'p19', text: 'Saya merasa lebih fokus ketika belajar di tempat yang tenang dan tidak terlalu ramai.', category: 'Introvert' },
+  { id: 'p20', text: 'Saya berani menyampaikan pendapat meskipun berbeda dengan pendapat teman.', category: 'Ekstrovert' },
 ];
 
 export const MULTIPLE_INTELLIGENCE_QUESTIONS: Question[] = [
